@@ -32,7 +32,7 @@
 		});
 		// odczyt zapisanej wartości
 		var barcode = window.localStorage.getItem("barcode");
-		$('#barcode').val(barcode);
+		$('#barcode').val(barcode).change();
 	});
 	
 	/**
@@ -47,8 +47,7 @@
 				var barcode = result.text;
 				if (barcode.length) {
 					window.localStorage.setItem("barcode", barcode);
-					$('#barcode').val(barcode);
-					updateTrackingLink(barcode);
+					$('#barcode').val(barcode).change();
 				}
 			}
 			, function(error) {
