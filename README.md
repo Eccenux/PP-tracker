@@ -6,7 +6,11 @@ PP tracker
 
 Pobieranie
 ----------
-
+<a href="https://build.phonegap.com/apps/296028/share">
+  <img align="right" 
+  src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://build.phonegap.com/apps/296028/install/?qr_key=7zrfu1Lg8fP97RUZfpw1&chld=L|1&choe=UTF-8" 
+  alt="kod do pobrania">
+</a>
 Gotowy program można pobrać ze [strony apki na PhoneGap Build](https://build.phonegap.com/apps/296028/share). Zaznaczam, że aplikacja jest w pełni funkcjonalna tylko na platformie Android. Na pozostałych platformach aplikacja będzie co prawda umożliwiać tylko ręczne wpisanie kodu, ale kod jest zapamiętywany między uruchomieniami.
 
 Teoretycznie aplikacja może działać na iOS. Jeśli ktoś ma nadmiarowy klucz do Apple Store (albo nadmiarowe $100), to proszę o kontakt ;-).
