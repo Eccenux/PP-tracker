@@ -17,28 +17,101 @@
 	<script type="text/javascript" src="ext/jquery/jquery.mobile-min.js"></script>
 	
 	<!-- plugin(s) -->
-	<!--
-	<script type="text/javascript" src="ext/barcodescanner.js"></script>
-	-->
 	<script src="phonegap.js"></script>
 	<script src="barcodescanner.js"></script>
 
-	<!-- test -->
+	<!-- app-code -->
 	<script>
-	function test() {
-		window.plugins.barcodeScanner.scan( function(result) {
-				alert("We got a barcode\n" +
-						  "Result: " + result.text + "\n" +
-						  "Format: " + result.format + "\n" +
-						  "Cancelled: " + result.cancelled);
-			}, function(error) {
-				alert("Scanning failed: " + error);
+	/**
+	 * Inicjowanie
+	 */
+	$(function(){
+		// aktualizacja linka po wpisaniu kodu
+		$('#barcode').change(function(){
+			updateTrackingLink(this.value);
+		});
+		// odczyt zapisanej wartości
+		var barcode = window.localStorage.getItem("barcode");
+		$('#barcode').val(barcode);
+	});
+	
+	/**
+	 * Otworzenie śledzenia wg kodu
+	 */
+	function readCode() {
+		window.plugins.barcodeScanner.scan(function(result) {
+				//"Result: " + result.text
+				//"Format: " + result.format
+				//"Cancelled: " + result.cancelled
+				
+				var barcode = result.text;
+				if (barcode.length) {
+					window.localStorage.setItem("barcode", barcode);
+					$('#barcode').val(barcode);
+					updateTrackingLink(barcode);
+				}
+			}
+			, function(error) {
+				alert("Nie udało się odczytać kodu."
+					+"\n\nInformacja zwrócona przez wtyczkę: " + error);
 			}
 		);
+	}
+
+	/**
+	 * Aktualizacja linka do śledzenia
+	 */
+	function updateTrackingLink(barcode) {
+		$('#open-tracking-link')
+			.attr(
+				'href',
+				'sledz-poczta-polska.html#?identyfikator=' + barcode
+			)
+		;
 	}
 	</script>
 </head>
 <body lang="pl">
-<input type="button" onclick="test()" value="test">
+	<!--
+		page-start
+	-->	
+	<div data-role="page" id="page-start">
+
+		<div data-role="header">
+			<h1>PP tracker</h1>
+		</div><!-- /header -->
+
+		<div data-role="content">
+			<form action="#" method="post">
+				<label for="barcode">Kod przesyłki:</label>
+				<input type="text" id="barcode">
+				
+				<div class="buttons ui-grid-a">
+					<div class="ui-block-a">
+						<input type="button" onclick="readCode();" value="Czytaj kod">
+					</div>
+					<div class="ui-block-b">
+						<a href="#page-not-ready" data-role="button" id="open-tracking-link" data-ajax="false"
+						   >Śledź</a>
+					</div>
+				</div>
+			</form>
+			<a href="#page-info" data-rel="dialog" data-role="button" data-icon="info">O programie</a>
+		</div><!-- /content -->
+	</div><!-- /page -->
+
+	<div data-role="page" id="page-info" data-theme="a">
+		<div data-role="header" data-theme="b">
+			<h1>O programie</h1>
+		</div><!-- /header -->
+
+		<div data-role="content">
+			<p>Copyright &copy; 2013 Maciej &bdquo;Nux&rdquo; Jaros.</p>
+			<p>Aplikacja <em>PP tracker</em> umożliwia sczytanie identyfikatora przesyłki z kodu kreskowego i szybkie sprawdzenie gdzie jest przesyłka.</p>
+			<p>W aplikacji użyto wtyczki <a href="https://github.com/wildabeast/BarcodeScanner/blob/master/README.md" target="_blank">BarcodeScanner</a>.</p>
+			<p>Kod skryptu jest dotępny na GitHub.</p>
+			<a href="#" data-rel="back" data-role="button">Zamknij</a>
+		</div><!-- /content -->
+	</div><!-- /page -->
 </body>
 </html>
