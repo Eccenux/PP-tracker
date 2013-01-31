@@ -1,5 +1,8 @@
-PP-tracker
+<img align="right" src="https://raw.github.com/Eccenux/PP-tracker/master/app/logo/logo128.png" alt="Logo">
+PP tracker
 ==========
+
+<em>PP tracker</em> umożliwia śledzenie przesyłek Poczty Polskiej w telefonie, co jest ułatwione dzięki wbudowanemu czytnikowi kodów kreskowych.
 
 Pobieranie
 ----------
@@ -10,8 +13,6 @@ Teoretycznie aplikacja może działać na iOS. Jeśli ktoś ma nadmiarowy klucz 
 
 O programie
 -----------
-
-PP-tracker umożliwia śledzenie przesyłek Poczty Polskiej w telefonie, co jest ułatwione dzięki wbudowanemu czytnikowi kodów kreskowych.
 
 W aplikacji użyto wtyczki do czytania kodów [BarcodeScanner](https://github.com/wildabeast/BarcodeScanner/blob/master/README.md). Do zbudowania samej aplikacji użyto programu [PhoneGap](http://phonegap.com/).
 
