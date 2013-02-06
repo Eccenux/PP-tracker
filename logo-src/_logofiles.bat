@@ -15,6 +15,8 @@ echo Nokia + iPad
 CALL _svg2png.bat Logo.svg %tmpset_OUT_PATH%logo114.png 114
 echo Default
 CALL _svg2png.bat Logo.svg %tmpset_OUT_PATH%logo128.png 128
+echo Android market
+CALL _svg2png.bat Logo.svg %tmpset_OUT_PATH%logo512.png 512
 
 echo Koniec.
 pause
