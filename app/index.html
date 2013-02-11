@@ -23,22 +23,58 @@
 	<!-- app-code -->
 	<script>
 	/**
-	 * Inicjowanie
+	 * Inicjowanie.
 	 */
 	$(function(){
+		$barcode = $('#barcode');
+
 		// aktualizacja linka po wpisaniu kodu
-		$('#barcode').change(function(){
-			updateTrackingLink(this.value);
+		$barcode.change(function(){
+			var barcode = this.value;
+			saveCode(barcode);
+			updateTrackingLink(barcode);
+			
 		});
+
 		// odczyt zapisanej wartości
-		var barcode = window.localStorage.getItem("barcode");
-		$('#barcode').val(barcode).change();
+		var barcode = readCode();
+		$barcode.val(barcode).change();
+
+		// scan setup
+		window.barcodeScannerAvailable = false;
+		if ('plugins' in window && 'barcodeScanner' in window.plugins) {
+			window.barcodeScannerAvailable = true;
+			// szybkie kliknięcie dla urządzeń dotykowych prowadzące do skanowania
+			$('#scan-code-button').bind('vclick', function() {
+				scanCode();
+			});
+		} else {
+			$('#action-buttons-container').removeClass('ui-grid-a');
+			$('#scan-code-button-container').removeClass('ui-block-a').hide();;
+			$('#open-tracking-link-container').removeClass('ui-block-b');
+		}
 	});
 	
 	/**
-	 * Otworzenie śledzenia wg kodu
+	 * Zapis kodu.
+	 *
+	 * @param {string} barcode Tekst kodu kreskowego.
+	 */
+	function saveCode(barcode) {
+		window.localStorage.setItem("barcode", barcode);
+	}
+	/**
+	 * Pobranie zapisanego kodu.
 	 */
 	function readCode() {
+		var barcode = window.localStorage.getItem("barcode");
+		return (barcode ? barcode : "");
+	}
+
+	/**
+	 * Odczytanie kodu przez skaner.
+	 */
+	function scanCode() {
 		window.plugins.barcodeScanner.scan(function(result) {
 				//"Result: " + result.text
 				//"Format: " + result.format
@@ -46,7 +82,6 @@
 				
 				var barcode = result.text;
 				if (barcode.length) {
-					window.localStorage.setItem("barcode", barcode);
 					$('#barcode').val(barcode).change();
 				}
 			}
@@ -58,7 +93,9 @@
 	}
 
 	/**
-	 * Aktualizacja linka do śledzenia
+	 * Aktualizacja linka do śledzenia.
+	 * 
+	 * @param {string} barcode Tekst kodu kreskowego.
 	 */
 	function updateTrackingLink(barcode) {
 		$('#open-tracking-link')
@@ -68,6 +105,23 @@
 			)
 		;
 	}
+
+	//
+	// Startup settings for jquery mobile
+	//
+	$(document).bind("mobileinit", function()
+	{
+		$.mobile.defaultPageTransition = "none";
+	});
+	
+	//
+	// Setup page transitions actions
+	//
+	/*
+	$(document).bind( "pagebeforechange", function( e, data )
+	{
+	});
+	*/
 	</script>
 </head>
 <body lang="pl">
@@ -85,11 +139,11 @@
 				<label for="barcode">Kod przesyłki:</label>
 				<input type="text" id="barcode">
 				
-				<div class="buttons ui-grid-a">
-					<div class="ui-block-a">
-						<input type="button" onclick="readCode();" value="Czytaj kod">
+				<div class="buttons ui-grid-a" id="action-buttons-container">
+					<div class="ui-block-a" id="scan-code-button-container">
+						<input type="button" id="scan-code-button" value="Czytaj kod">
 					</div>
-					<div class="ui-block-b">
+					<div class="ui-block-b" id="open-tracking-link-container">
 						<a href="#page-not-ready" data-role="button" id="open-tracking-link" data-ajax="false"
 						   >Śledź</a>
 					</div>
@@ -107,7 +161,7 @@
 		<div data-role="content">
 			<p>Copyright &copy; 2013 Maciej &bdquo;Nux&rdquo; Jaros.</p>
 			<p>Aplikacja <em>PP tracker</em> umożliwia sczytanie identyfikatora przesyłki z kodu kreskowego i szybkie sprawdzenie gdzie jest przesyłka.</p>
-			<p>W aplikacji użyto wtyczki <a href="https://github.com/wildabeast/BarcodeScanner/blob/master/README.md" target="_blank">BarcodeScanner</a>.</p>
+			<p>W aplikacji użyto wtyczki <a href="https://github.com/wildabeast/BarcodeScanner/blob/master/README.md" target="_blank">BarcodeScanner</a> (dostępna dla systemu Android i iOS).</p>
 			<p>Kod skryptu jest dotępny na GitHub.</p>
 			<a href="#" data-rel="back" data-role="button">Zamknij</a>
 		</div><!-- /content -->
