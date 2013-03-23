@@ -62,12 +62,16 @@
 			function showMenu()
 			{
 				//$menu.slideToggle();	// not working with top set
-				fixHeight()
+				fixHeight();
 				var menuHeightPx = menuStartHeight.toString()+"px";
 				if ($menu.is(':hidden'))
 				{
 					menu.style.display = "block";
-					$menu.animate({top: "-="+menuHeightPx, height:"+="+menuHeightPx}, 'fast');
+					$menu.animate({top: "-="+menuHeightPx, height:"+="+menuHeightPx}, 'fast', function(){
+						// in case 1st calculation was wrong... (e.g. beacuse img didn't load)
+						$menu.css('height', 'auto');
+						menuStartHeight = $menu.height();
+					});
 				}
 				else
 				{
@@ -118,6 +122,8 @@
 		+ '></iframe>'
 	);
 </script>
-<div id="menu"><a href="index.html"><img src="home.png" /><span>start</span></a></div>
+<div id="menu"><a href="index.html"
+	><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAMFBMVEUEAgSIh4jIyMhHR0fn5ecpJymrratra2v8/vwVFBXW1dZYWli4uribmZs4Nzh8enxxP0uwAAAACXBIWXMAAAInAAACJwG+ElQIAAAAsklEQVR42mNgoC+IFcUuzt3RsQGrhERHRyM2cbYOIEjAFOfUAEk0TcCQeNIBBn5YbIaADZg2QwCa/XM64OAksjjrCoREVwCShEkHEnBGiLN3oIACuMQNVIleLDaj2I9sM4r9Fh0YoBkkzteBBTyAhSo6SMB0K8LFnFIuLqiiLi7rYaGfgSzehhQkQ1Li5kwgWIFF4gKIORQkKpAl2pEkmJAlFJBTtf1/IDAAseo/Mww8AABvVQDTCez9OQAAAABJRU5ErkJggg==" /><span
+	>start</span></a></div>
 </body>
 </html>
