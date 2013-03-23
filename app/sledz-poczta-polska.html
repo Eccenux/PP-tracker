@@ -36,7 +36,7 @@
 				$menu = $(menu);
 				menuStartHeight = $menu.height();
 				menu.style.display = "none";
-				$menu.css('height', '0px');
+				menu.style.height = '0px';
 
 				// only for phonegap
 				document.addEventListener("deviceready", function(){
@@ -49,18 +49,24 @@
 			{
 				// fix position
 				var viewportHeight = $(window).height();
-				$menu.css('position', 'absolute');
+				menu.style.position = 'absolute';
 				if ($menu.is(':hidden'))
 				{
-					$menu.css('top', (viewportHeight) + "px");
+					menu.style.top = (viewportHeight) + "px";
 				}
 				else
 				{
-					$menu.css('top', (viewportHeight - menuStartHeight) + "px");
+					menu.style.top = (viewportHeight - menuStartHeight) + "px";
 				}
 			}
+			var animating = false;
 			function showMenu()
 			{
+				if (animating)
+				{
+					return;
+				}
+				animating = true; 
 				//$menu.slideToggle();	// not working with top set
 				fixHeight();
 				var menuHeightPx = menuStartHeight.toString()+"px";
@@ -68,15 +74,14 @@
 				{
 					menu.style.display = "block";
 					$menu.animate({top: "-="+menuHeightPx, height:"+="+menuHeightPx}, 'fast', function(){
-						// in case 1st calculation was wrong... (e.g. beacuse img didn't load)
-						$menu.css('height', 'auto');
-						menuStartHeight = $menu.height();
+						animating = false; 
 					});
 				}
 				else
 				{
 					$menu.animate({top: "+="+menuHeightPx, height:"-="+menuHeightPx}, 'slow', function(){
 						menu.style.display = "none";
+						animating = false; 
 					});
 				}
 			};
@@ -123,7 +128,7 @@
 	);
 </script>
 <div id="menu"><a href="index.html"
-	><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwBAMAAAClLOS0AAAAMFBMVEUEAgSIh4jIyMhHR0fn5ecpJymrratra2v8/vwVFBXW1dZYWli4uribmZs4Nzh8enxxP0uwAAAACXBIWXMAAAInAAACJwG+ElQIAAAAsklEQVR42mNgoC+IFcUuzt3RsQGrhERHRyM2cbYOIEjAFOfUAEk0TcCQeNIBBn5YbIaADZg2QwCa/XM64OAksjjrCoREVwCShEkHEnBGiLN3oIACuMQNVIleLDaj2I9sM4r9Fh0YoBkkzteBBTyAhSo6SMB0K8LFnFIuLqiiLi7rYaGfgSzehhQkQ1Li5kwgWIFF4gKIORQkKpAl2pEkmJAlFJBTtf1/IDAAseo/Mww8AABvVQDTCez9OQAAAABJRU5ErkJggg==" /><span
+	><img height="48" width="48" src="home.png" /><span
 	>start</span></a></div>
 </body>
 </html>
