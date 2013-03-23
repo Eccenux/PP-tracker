@@ -12,21 +12,112 @@
 	<meta name="author" content="Maciej Jaros">
 	<meta name="copyright" content="Poczta Polska">
 
+	<script type="text/javascript" src="ext/jquery/jquery-min.js"></script>
+	<script src="phonegap.js"></script>
+	<!--
+	-->
+
 	<script>
 		var linkBazowy = "http://sledzeniepp.poczta-polska.pl/wiempost/home.pa?identyfikator=";
+		//var linkBazowy = "index.html?identyfikator=";
 		var identyfikator = "";
 		window.location.hash.replace(/identyfikator=([^&]+)/, function(a, value) {
 			identyfikator = value;
 		});
+		
+		//
+		// Obsługa menu
+		//
+		(function($)
+		{
+			var menu, $menu, menuStartHeight;
+			$(function(){
+				menu = document.getElementById("menu");
+				$menu = $(menu);
+				menuStartHeight = $menu.height();
+				menu.style.display = "none";
+
+				// only for phonegap
+				document.addEventListener("deviceready", function(){
+					fixHeight();
+					$(window).resize(fixHeight);
+					document.addEventListener("menubutton", showMenu, false);
+				}, false);
+			});
+			function fixHeight()
+			{
+				// fix position
+				var viewportHeight = $(window).height();
+				$menu.css('position', 'absolute');
+				if ($menu.is(':hidden'))
+				{
+					$menu.css('top', (viewportHeight) + "px");
+				}
+				else
+				{
+					$menu.css('top', (viewportHeight - menuStartHeight) + "px");
+				}
+			}
+			function showMenu()
+			{
+				//$menu.slideToggle();	// not working with top set
+				fixHeight()
+				var menuHeightPx = menuStartHeight.toString()+"px";
+				if ($menu.is(':hidden'))
+				{
+					menu.style.display = "block";
+					$menu.show().animate({top: "-="+menuHeightPx, height:"+="+menuHeightPx}, 'fast');
+				}
+				else
+				{
+					$menu.animate({top: "+="+menuHeightPx, height:"-="+menuHeightPx}, 'slow', function(){
+						menu.style.display = "none";
+					});
+				}
+			};
+			// test
+			/**
+			$(function()
+			{
+				$(document.body).prepend('<a href="#">menu</a>').click(showMenu);
+			});
+			/**/
+		})(jQuery);
 	</script>
+	<style>
+		#menu {
+			display: none;
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			background-color: black;
+			width:100%;
+			box-sizing: border-box;
+			padding:0;
+			margin:0;
+			text-align: center;
+		}
+		#menu a {
+			padding: 6px;
+			display: inline-block;
+			text-decoration: none;
+			color: white;
+		}
+		#menu img,#menu span {
+			display: block;
+		}
+	</style>
 </head>
-<body lang="pl"><script>
+<body lang="pl">
+<script>
 	document.write(''
 		+ '<iframe '
 		+ ' src="' + linkBazowy + identyfikator + '"'
 		+ ' width="100%" height="600" border="0" '
 		+ ' style="border:0px none black; padding:0; margin:0; min-width:410px"'
-		+ '>'
+		+ '></iframe>'
 	);
-</script></body>
+</script>
+<div id="menu"><a href="index.html"><img src="home.png" /><span>start</span></a></div>
+</body>
 </html>

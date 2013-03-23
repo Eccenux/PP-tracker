@@ -17,6 +17,7 @@
 	<script type="text/javascript" src="ext/jquery/jquery.mobile-min.js"></script>
 	
 	<!-- plugin(s) -->
+	<!-- phonegap.js = cordova.js (file is injected automatically) -->
 	<script src="phonegap.js"></script>
 	<script src="barcodescanner.js"></script>
 
@@ -50,7 +51,7 @@
 			});
 		} else {
 			$('#action-buttons-container').removeClass('ui-grid-a');
-			$('#scan-code-button-container').removeClass('ui-block-a').hide();;
+			$('#scan-code-button-container').removeClass('ui-block-a').hide();
 			$('#open-tracking-link-container').removeClass('ui-block-b');
 		}
 	});
