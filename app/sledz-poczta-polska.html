@@ -36,6 +36,7 @@
 				$menu = $(menu);
 				menuStartHeight = $menu.height();
 				menu.style.display = "none";
+				$menu.css('height', '0px');
 
 				// only for phonegap
 				document.addEventListener("deviceready", function(){
@@ -66,7 +67,7 @@
 				if ($menu.is(':hidden'))
 				{
 					menu.style.display = "block";
-					$menu.show().animate({top: "-="+menuHeightPx, height:"+="+menuHeightPx}, 'fast');
+					$menu.animate({top: "-="+menuHeightPx, height:"+="+menuHeightPx}, 'fast');
 				}
 				else
 				{
@@ -86,7 +87,6 @@
 	</script>
 	<style>
 		#menu {
-			display: none;
 			position: fixed;
 			bottom: 0;
 			left: 0;
