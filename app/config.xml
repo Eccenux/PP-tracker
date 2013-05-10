@@ -2,8 +2,8 @@
     <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "pl.enux.pptracker"
-        versionCode="10101"
-        version   = "1.1.1">
+        versionCode="10102"
+        version   = "1.1.2">
 	<!-- versionCode = Mmmbb : Major.minor.build -->
 	
     <name>PP tracker</name>
@@ -28,9 +28,7 @@
 	<icon src="logo/logo080.png" width="80"  height="80"/>
 	<icon src="logo/logo114.png" width="114" height="114"/>
 
-	<!--
-	<preference name="phonegap-version" value="2.0.0" />
-	-->
+	<preference name="phonegap-version" value="2.5.0" />
 	<!--
 		We don't really need specific permissions,
 		but PGB will add some.
