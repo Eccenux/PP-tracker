@@ -20,7 +20,10 @@
 	<!-- phonegap.js = cordova.js (file is injected automatically) -->
 	<script src="phonegap.js"></script>
 	<script src="barcodescanner.js"></script>
-
+	
+	<!-- scanner helper -->
+	<script src="codeScanner.js"></script>
+	
 	<!-- app-code -->
 	<script>
 	/**
@@ -42,9 +45,9 @@
 		$barcode.val(barcode).change();
 
 		// scan setup
-		window.barcodeScannerAvailable = false;
-		if ('plugins' in window && 'barcodeScanner' in window.plugins) {
-			window.barcodeScannerAvailable = true;
+		//codeScanner.mockingEnabled = true;
+		codeScanner.init();
+		if (codeScanner.scannerAvailable) {
 			// szybkie kliknięcie dla urządzeń dotykowych prowadzące do skanowania
 			$('#scan-code-button').bind('vclick', function() {
 				scanCode();
@@ -76,12 +79,13 @@
 	 * Odczytanie kodu przez skaner.
 	 */
 	function scanCode() {
-		window.plugins.barcodeScanner.scan(function(result) {
-				//"Result: " + result.text
-				//"Format: " + result.format
-				//"Cancelled: " + result.cancelled
-				
-				var barcode = result.text;
+		codeScanner.scan(
+			/**
+			 * @param {CodeScannerResult} results
+			 * @returns {undefined}
+			 */
+			function (results) {
+				var barcode = results.text;
 				if (barcode.length) {
 					$('#barcode').val(barcode).change();
 				}
