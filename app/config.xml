@@ -17,7 +17,7 @@
     </author>
 	
 	<!-- plugins -->
-	<gap:plugin name="com.phonegap.plugins.barcodescanner" version="0.5.3" />
+	<gap:plugin name="com.phonegap.plugins.barcodescanner" version="0.6.0" />
 	
 	<!-- icons -->
 	<icon src="logo/logo128.png" default="true" />
@@ -28,7 +28,7 @@
 	<icon src="logo/logo080.png" width="80"  height="80"/>
 	<icon src="logo/logo114.png" width="114" height="114"/>
 
-	<preference name="phonegap-version" value="1.9.0" />
+	<preference name="phonegap-version" value="2.9.0" />
 	<!--
 		We don't really need specific permissions,
 		but PGB will add some.
