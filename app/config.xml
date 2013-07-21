@@ -17,7 +17,7 @@
     </author>
 	
 	<!-- plugins -->
-	<gap:plugin name="com.phonegap.plugins.barcodescanner" version="0.3.1" />
+	<gap:plugin name="com.phonegap.plugins.barcodescanner" version="0.5.5" />
 	
 	<!-- icons -->
 	<icon src="logo/logo128.png" default="true" />
