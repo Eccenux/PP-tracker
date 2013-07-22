@@ -1,4 +1,4 @@
-<img align="right" src="https://raw.github.com/Eccenux/PP-tracker/master/app/logo/logo128.png" alt="Logo">
+<img style="z-index:1; position:relative;" align="right" src="https://raw.github.com/Eccenux/PP-tracker/master/app/logo/logo128.png" alt="Logo">
 PP tracker
 ==========
 
@@ -27,6 +27,6 @@ Licencja
 
 Copyright &copy; 2013 Maciej "Nux" Jaros.
 
-Licencja [CC-BY-SA](http://creativecommons.org/licenses/by-sa/3.0/).
+Licencja [CC-BY](http://creativecommons.org/licenses/by/3.0/) lub [MIT](http://www.opensource.org/licenses/mit-license).
 
 Informacje na temat autorów i licencji dla poszczególnych bibliotek (folder ext) znajdują się w odpowiednich plikach JS oraz CSS.
