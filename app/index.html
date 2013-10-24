@@ -27,12 +27,16 @@
 	<!-- app-code -->
 	<script>
 	/**
-	 * Inicjowanie.
+	 * Init app
 	 */
 	$(function(){
 		$barcode = $('#barcode');
 
-		// aktualizacja linka po wpisaniu kodu
+		//
+		// Code storage (and restoring)
+		//
+		
+		// link update after new code is filled in
 		$barcode.change(function(){
 			var barcode = this.value;
 			saveCode(barcode);
@@ -40,16 +44,16 @@
 			
 		});
 
-		// odczyt zapisanej wartości
+		// read saved value
 		var barcode = readCode();
 		$barcode.val(barcode).change();
+
 
 		// scan setup
 		//codeScanner.mockingEnabled = true;
 		codeScanner.init();
 		if (codeScanner.scannerAvailable) {
-			// szybkie kliknięcie dla urządzeń dotykowych prowadzące do skanowania
-			$('#scan-code-button').bind('vclick', function() {
+			$('#scan-code-button').bind('vclick', function() {	// vclick is faster then click
 				scanCode();
 			});
 		} else {
@@ -60,7 +64,7 @@
 	});
 	
 	/**
-	 * Zapis kodu.
+	 * Save code to storage.
 	 *
 	 * @param {string} barcode Tekst kodu kreskowego.
 	 */
@@ -68,7 +72,7 @@
 		window.localStorage.setItem("barcode", barcode);
 	}
 	/**
-	 * Pobranie zapisanego kodu.
+	 * Read code from storage.
 	 */
 	function readCode() {
 		var barcode = window.localStorage.getItem("barcode");
@@ -76,7 +80,7 @@
 	}
 
 	/**
-	 * Odczytanie kodu przez skaner.
+	 * Read code from scanner.
 	 */
 	function scanCode() {
 		codeScanner.scan(
@@ -98,7 +102,7 @@
 	}
 
 	/**
-	 * Aktualizacja linka do śledzenia.
+	 * Update tracking link with barcode.
 	 * 
 	 * @param {string} barcode Tekst kodu kreskowego.
 	 */
