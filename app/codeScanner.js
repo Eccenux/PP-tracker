@@ -85,7 +85,13 @@ function CodeScanner()
 			scanner = window.plugins.barcodeScanner;
 		}
 		else if ('cordova' in window) {
-			scanner = cordova.require("cordova/plugin/BarcodeScanner");
+			// barcodeScanner 1.0
+			if ('plugins' in cordova && 'barcodeScanner' in cordova.plugins) {
+				scanner = cordova.plugins.barcodeScanner;
+			// barcodeScanner 0.7
+			} else {
+				scanner = cordova.require("cordova/plugin/BarcodeScanner");
+			}
 		}
 
 		// ready?
