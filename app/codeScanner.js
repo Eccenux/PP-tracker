@@ -82,7 +82,7 @@ function CodeScanner()
 			scanner = window.plugins.barcodeScanner;
 		}
 		else if ('barcodeScanner' in window) {
-			scanner = window.plugins.barcodeScanner;
+			scanner = window.barcodeScanner;
 		}
 		else if ('cordova' in window) {
 			// barcodeScanner 1.0
