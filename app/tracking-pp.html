@@ -75,13 +75,26 @@
 			(function(){
 				var ppTrackingService = new TrackingService('http://sledzenie.poczta-polska.pl/');
 				//var ppTrackingService = new TrackingService('http://m.enux.pl.l/pp-tracker/cors.php?server=pp&url=');
-				ppTrackingService.getInfo(identyfikator)
-				.done(function(html) {
-					document.getElementById('tracking-table').innerHTML = html.replace(/Usługi komplementarne\/dodatkowe/i, 'Ekstra');
-				})
-				.fail(function(info) {
+
+				function trackingFail(info){
 					document.getElementById('error-message').innerHTML = info;
-				});
+				}
+				function trackingDone(html){
+					document.getElementById('tracking-table').innerHTML = html
+						.replace(/Usługi komplementarne\/dodatkowe/i, 'Ekstra')	// shorter column name
+						.replace(/type=["']?submit["']?/i, 'type="button"')	// arch search
+					;
+					// arch search
+					$('#BSzukajO')
+						.val('szukaj archiwalnych')
+						.click(function(){
+							ppTrackingService.getInfo(identyfikator, true).done(trackingDone).fail(trackingFail);
+						})
+						.button()
+					;
+				}
+
+				ppTrackingService.getInfo(identyfikator).done(trackingDone).fail(trackingFail);
 			})();
 			</script>
 		</div><!-- /content -->

@@ -46,11 +46,12 @@ function TrackingService(baseUrl) {
 	 * Returns info by referer based on \a code.
 	 * 
 	 * @param {String} code Package code.
+	 * @param {Boolean} arch Archival search (default false).
 	 * @returns {jQuery.Deferred} Object on which done/fail/always can be call to wait for result.
 	 */
-	this.getInfo = function (code) {
+	this.getInfo = function (code, arch) {
 		var deferredExec = new jQuery.Deferred ();
-		
+
 		jQuery.ajax({
 			url: baseUrl, dataType:'html',
 			cache: true
@@ -62,11 +63,16 @@ function TrackingService(baseUrl) {
 				serviceCode = code;
 			});
 			if (serviceCode.length) {
+				var searchData = { s:serviceCode, n:code };
+				if (typeof(arch) == 'boolean' && arch) {
+					searchData['arch'] = true;
+				}
+
 				jQuery.ajax({
 					type: "POST",
 					cache: true,
 					url: baseUrl + "wssClient.php",
-					data: { s:serviceCode, n:code }
+					data: searchData
 				})
 				.done(function(html) {
 					//console.log(html);
