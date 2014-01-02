@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Śledzenie przesyłek Poczty Polskiej</title>
+	<meta charset="UTF-8">
+	<!--
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=4">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta name="author" content="Maciej Jaros">
+
+	<link rel="stylesheet" href="ext/jquery/jquery.mobile-min.css">
+	<script type="text/javascript" src="ext/jquery/jquery-min.js"></script>
+	<script type="text/javascript" src="ext/jquery/jquery.mobile-min.js"></script>
+
+	<script type="text/javascript" src="tracking-pp.js"></script>
+	<script src="phonegap.js"></script>
+	<!--
+	-->
+
+	<script>
+		var identyfikator = "";
+		window.location.hash.replace(/identyfikator=([^&]+)/, function(a, value) {
+			identyfikator = value;
+		});
+		
+		//
+		// Back to internal HTML page setup
+		$('a[data-rel|="back-internal-html"]')
+			.unbind()
+			.click(function(event)
+			{
+				// phonegap
+				if (typeof(navigator) != 'undefined' && typeof(navigator.app) != 'undefined' && typeof(navigator.app.backHistory) == 'function')
+				{
+					navigator.app.backHistory();
+				}
+				// standard
+				else
+				{
+					history.go(-1);
+				}
+				event.preventDefault();
+				return false;
+			})
+		;
+	</script>
+	<style type="text/css">
+		.zdarzenia_green { color: #359C3E;}
+		.zdarzenia_red { color: #B30606;}
+		/* nagłówki sekcji i genertor linki */
+		#tracking-table table tr:first-child,
+		#b_link, #link
+		{display: none}
+		/* tabelki */
+		#zadarzenia_td td {padding: .4em}
+		#zadarzenia_td tr:nth-child(2n) {background: rgba(255, 255, 255, 0.7)}
+	</style>
+</head>
+<body lang="pl">
+	<div data-role="page" id="page-tracking">
+		<div data-role="header">
+			<a href="index.html" data-icon="back" data-ajax="false">Powrót</a>
+			<h1>Śledzenie przesyłki</h1>
+		</div><!-- /header -->
+
+		<div data-role="content">
+			<div id="error-message">
+			</div>
+			<div id="tracking-table">
+			</div>
+			<script>
+			(function(){
+				var ppTrackingService = new TrackingService('http://sledzenie.poczta-polska.pl/');
+				//var ppTrackingService = new TrackingService('http://m.enux.pl.l/pp-tracker/cors.php?server=pp&url=');
+				ppTrackingService.getInfo(identyfikator)
+				.done(function(html) {
+					document.getElementById('tracking-table').innerHTML = html.replace(/Usługi komplementarne\/dodatkowe/i, 'Ekstra');
+				})
+				.fail(function(info) {
+					document.getElementById('error-message').innerHTML = info;
+				});
+			})();
+			</script>
+		</div><!-- /content -->
+	</div><!-- /page -->
+
+</body>
+</html>
