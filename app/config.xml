@@ -2,8 +2,8 @@
     <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "pl.enux.pptracker"
-        versionCode="10400"
-        version   = "1.4.0">
+        versionCode="10401"
+        version   = "1.4.1">
 	<!-- versionCode = Mmmbb : Major.minor.build -->
 	
     <name>PP tracker</name>

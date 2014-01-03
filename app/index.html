@@ -135,9 +135,14 @@
 		;
 		// QR
 		$('#page-show-barcode h1').text(barcode);
+		var position = $('#page-show-barcode .barcode_container').position();
+		var h_below = $('#page-show-barcode .below_barcode_container').height();
+		var h = $(window).height() - position.top - h_below - 20;
+		var w = $(window).width() - 2 * (position.left + 5);
+		var dimension = w > h ? h : w;	// min
 		$('#page-show-barcode .barcode_container')
 			.html('')
-			.qrcode({width: 200, height: 200, text: barcode})
+			.qrcode({width: dimension-20, height: dimension-20, text: barcode})
 		;
 	}
 
@@ -199,16 +204,18 @@
 		</div><!-- /content -->
 	</div><!-- /page -->
 
-	<div data-role="page" id="page-show-barcode" data-theme="a">
-		<div data-role="header" data-theme="b">
+	<div data-role="page" id="page-show-barcode">
+		<div data-role="header">
 			<h1>Kod</h1>
 		</div><!-- /header -->
 
 		<div data-role="content">
 			<div class="barcode_container">
 			</div>
-			<p>Zeskanuj kod innym urządzeniem.</p>
-			<a href="#" data-rel="back" data-role="button">Zamknij</a>
+			<div class="below_barcode_container">
+				<p>Zeskanuj kod innym urządzeniem.</p>
+				<a href="#" data-rel="back" data-role="button">Zamknij</a>
+			</div>
 		</div><!-- /content -->
 	</div><!-- /page -->
 
