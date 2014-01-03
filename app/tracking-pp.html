@@ -75,7 +75,7 @@
 			(function(){
 				var ppTrackingService = new TrackingService('http://sledzenie.poczta-polska.pl/');
 				//var ppTrackingService = new TrackingService('http://m.enux.pl.l/pp-tracker/cors.php?server=pp&url=');
-
+				
 				function trackingFail(info){
 					document.getElementById('error-message').innerHTML = info;
 				}
@@ -88,13 +88,15 @@
 					$('#BSzukajO')
 						.val('szukaj archiwalnych')
 						.click(function(){
-							ppTrackingService.getInfo(identyfikator, true).done(trackingDone).fail(trackingFail);
+							$.mobile.showPageLoadingMsg();
+							ppTrackingService.getInfo(identyfikator, true).done(trackingDone).fail(trackingFail).always(function(){$.mobile.hidePageLoadingMsg();});
 						})
 						.button()
 					;
 				}
 
-				ppTrackingService.getInfo(identyfikator).done(trackingDone).fail(trackingFail);
+				$.mobile.showPageLoadingMsg();
+				ppTrackingService.getInfo(identyfikator).done(trackingDone).fail(trackingFail).always(function(){$.mobile.hidePageLoadingMsg();});
 			})();
 			</script>
 		</div><!-- /content -->
