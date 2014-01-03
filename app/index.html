@@ -28,7 +28,7 @@
 	/**
 	 * Init app
 	 */
-	$(function(){
+	function initApp(){
 		$barcode = $('#barcode');
 
 		//
@@ -60,7 +60,17 @@
 			$('#scan-code-button-container').removeClass('ui-block-a').hide();
 			$('#open-tracking-link-container').removeClass('ui-block-b');
 		}
-	});
+	}
+
+	if ('cordova' in window) {
+		document.addEventListener("deviceready", function () {
+			$(initApp);
+		}, false);
+	}
+	else {
+		$(initApp);
+	}
+
 	
 	/**
 	 * Save code to storage.
