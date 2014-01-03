@@ -52,7 +52,7 @@
 		//codeScanner.mockingEnabled = true;
 		codeScanner.init();
 		if (codeScanner.scannerAvailable) {
-			$('#scan-code-button').bind('vclick', function() {	// vclick is faster then click
+			$('#scan-code-button').unbind().tap(function() {	// tap/vclick is faster then click
 				scanCode();
 			});
 		} else {
