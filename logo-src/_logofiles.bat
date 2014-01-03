@@ -11,6 +11,8 @@ echo iPhone + Android
 CALL _svg2png.bat Logo.svg %tmpset_OUT_PATH%logo072.png 72
 echo Nokia
 CALL _svg2png.bat Logo.svg %tmpset_OUT_PATH%logo080.png 80
+echo Jolla
+CALL _svg2png.bat Logo.svg %tmpset_OUT_PATH%logo086.png 86
 echo Nokia + iPad
 CALL _svg2png.bat Logo.svg %tmpset_OUT_PATH%logo114.png 114
 echo Default
