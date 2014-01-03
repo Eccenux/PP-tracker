@@ -6,7 +6,7 @@
     <!--
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=4">
 	-->
-	<meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=0.7">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<meta name="author" content="Maciej Jaros">
 	<meta name="copyright" content="Maciej Jaros">
@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="ext/jquery/jquery.mobile-min.css">
 	<script type="text/javascript" src="ext/jquery/jquery-min.js"></script>
 	<script type="text/javascript" src="ext/jquery/jquery.mobile-min.js"></script>
+	<script type="text/javascript" src="ext/jquery.qrcode.js"></script>
 	
 	<!-- plugin(s) -->
 	<!-- phonegap.js = cordova.js (file is injected automatically) -->
@@ -39,7 +40,7 @@
 		$barcode.change(function(){
 			var barcode = this.value;
 			saveCode(barcode);
-			updateTrackingLink(barcode);
+			updateLinks(barcode);
 			
 		});
 
@@ -115,12 +116,28 @@
 	 * 
 	 * @param {string} barcode Tekst kodu kreskowego.
 	 */
-	function updateTrackingLink(barcode) {
+	function updateLinks(barcode) {
 		$('#open-tracking-link')
 			.attr(
 				'href',
 				'tracking-pp.html#page-tracking?identyfikator=' + barcode
 			)
+		;
+		// mail
+		$('#mail-code-link')
+			.attr(
+				'href',
+				'mailto:?subject='
+					+ encodeURIComponent('Poczta (kod)')
+					+'&body='
+					+ encodeURIComponent('Link do śledzenia przesyłki: http://sledzenie.poczta-polska.pl/?numer=' + barcode)
+			)
+		;
+		// QR
+		$('#page-show-barcode h1').text(barcode);
+		$('#page-show-barcode .barcode_container')
+			.html('')
+			.qrcode({width: 200, height: 200, text: barcode})
 		;
 	}
 
@@ -150,6 +167,7 @@
 
 		<div data-role="header">
 			<h1>PP tracker</h1>
+			<a href="#page-info" data-rel="dialog" data-icon="info" data-iconpos="notext">O programie</a>
 		</div><!-- /header -->
 
 		<div data-role="content">
@@ -167,7 +185,29 @@
 					</div>
 				</div>
 			</form>
-			<a href="#page-info" data-rel="dialog" data-role="button" data-icon="info">O programie</a>
+			<div class="ui-corner-all" style="margin-top: 1em;">
+				<div class="ui-bar ui-bar-a ui-corner-top">
+					<h3>Podziel się kodem:</h3>
+				</div>
+				<div class="ui-body ui-body-c ui-corner-bottom">
+					<div style="margin-top: 1em;">
+						<a href="#page-show-barcode" data-role="button" data-inline="true">Osoba obok</a>
+						<a href="#" id="mail-code-link" data-role="button" data-inline="true">Wyślij link mailem</a>
+					</div>
+				</div>
+			</div>
+		</div><!-- /content -->
+	</div><!-- /page -->
+
+	<div data-role="page" id="page-show-barcode" data-theme="a">
+		<div data-role="header" data-theme="b">
+			<h1>Kod</h1>
+		</div><!-- /header -->
+
+		<div data-role="content">
+			<div class="barcode_container">
+			</div>
+			<a href="#" data-rel="back" data-role="button">Zamknij</a>
 		</div><!-- /content -->
 	</div><!-- /page -->
 
@@ -177,7 +217,7 @@
 		</div><!-- /header -->
 
 		<div data-role="content">
-			<p>Copyright &copy; 2013 Maciej &bdquo;Nux&rdquo; Jaros.</p>
+			<p>Copyright &copy; 2013-2014 Maciej &bdquo;Nux&rdquo; Jaros.</p>
 			<p>Aplikacja <em>PP tracker</em> umożliwia sczytanie identyfikatora przesyłki z kodu kreskowego i szybkie sprawdzenie gdzie jest przesyłka.</p>
 			<p>W aplikacji użyto wtyczki <a href="https://github.com/wildabeast/BarcodeScanner/blob/master/README.md" target="_blank">BarcodeScanner</a> (dostępna dla systemu Android i iOS).</p>
 			<p>Kod skryptu jest <a href="https://github.com/Eccenux/PP-tracker" target="_blank">dostępny na GitHub</a>.</p>
