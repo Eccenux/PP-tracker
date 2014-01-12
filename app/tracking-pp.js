@@ -95,8 +95,8 @@ function TrackingService(baseUrl) {
 }
 
 /* test *
-//window.ppTrackingService = new TrackingService('http://sledzenie.poczta-polska.pl/');
-window.ppTrackingService = new TrackingService('http://m.enux.pl.l/pp-tracker/cors.php?server=pp&url=');
+window.ppTrackingService = new TrackingService('http://emonitoring.poczta-polska.pl/');
+//window.ppTrackingService = new TrackingService('http://m.enux.pl.l/pp-tracker/cors.php?server=pp&url=');
 ppTrackingService.getInfo('123')
 .done(function(html) {
 	console.log(html);

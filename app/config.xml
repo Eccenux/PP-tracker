@@ -2,8 +2,8 @@
     <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "pl.enux.pptracker"
-        versionCode="10401"
-        version   = "1.4.1">
+        versionCode="10402"
+        version   = "1.4.2">
 	<!-- versionCode = Mmmbb : Major.minor.build -->
 	
     <name>PP tracker</name>
@@ -42,5 +42,5 @@
 	<preference name="permissions" value="none"/>
 
 	<!-- Cross domain AJAX access; "*" would mean: "to any" domain -->
-	<access origin="sledzenie.poczta-polska.pl/*" />
+	<access origin="emonitoring.poczta-polska.pl/*" />
 </widget>
