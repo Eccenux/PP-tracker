@@ -18,10 +18,10 @@
 	
 	<!-- plugins; info: https://build.phonegap.com/plugins -->
 	<!-- scanner version info: https://github.com/wildabeast/BarcodeScanner/issues/68 -->
-	<gap:plugin name="com.phonegap.plugins.barcodescanner" version="1.1.0" />
+	<gap:plugin name="com.phonegap.plugins.barcodescanner" version="2.0.0" />
 
 	<!-- PG version -->
-	<preference name="phonegap-version" value="3.4.0" />
+	<preference name="phonegap-version" value="3.6.3" />
 
 	<!-- Mobile OS -->
 	<gap:platform name="android" />
