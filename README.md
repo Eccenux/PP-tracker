@@ -30,7 +30,7 @@ Wersja dla przeglądarek różni się obecnie dosyć znacząco od tej dostępnej
 Licencja
 --------
 
-Copyright &copy; 2013-2014 Maciej "Nux" Jaros.
+Copyright &copy; 2013-2017 Maciej "Nux" Jaros.
 
 Licencja [CC-BY](http://creativecommons.org/licenses/by/3.0/) lub [MIT](http://www.opensource.org/licenses/mit-license).
 
