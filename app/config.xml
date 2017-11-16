@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns = "http://www.w3.org/ns/widgets"
-        xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "pl.enux.pptracker"
-        versionCode="10500"
-        version   = "1.5.0">
+	xmlns:gap  = "http://phonegap.com/ns/1.0"
+	id         = "pl.enux.pptracker"
+	versionCode="10500"
+	version    ="1.5.0"
+>
 	<!-- versionCode = Mmmbb : Major.minor.build -->
 	
-    <name>PP tracker</name>
+	<name>PP tracker</name>
 
-    <description>
-        Poczta Polska - śledzenie przesyłek
-    </description>
+	<description>
+		Poczta Polska - śledzenie przesyłek
+	</description>
 
-    <author href="https://enux.pl" email="egil@wp.pl">
-        Maciej Nux Jaros
-    </author>
-	
+	<author href="https://enux.pl" email="egil@wp.pl">
+		Maciej Nux Jaros
+	</author>
+
+	<!-- Mobile OS -->
+	<gap:platform name="android" />
+
+	<!-- PG version -->
+	<preference name="phonegap-version" value="cli-6.5.0" />
+
 	<!-- plugins; info: https://build.phonegap.com/plugins -->
 	<!-- scanner version info: https://github.com/wildabeast/BarcodeScanner/issues/68 -->
 	<plugin name="phonegap-plugin-barcodescanner">
 		<param name="CAMERA_USAGE_DESCRIPTION" value="To scan barcodes." />
 	</plugin>
 
-	<!-- PG version -->
-	<preference name="phonegap-version" value="cli-6.5.0" />
 
-	<!-- Mobile OS -->
-	<gap:platform name="android" />
-	
 	<!-- icons -->
 	<icon src="logo/logo128.png" default="true" />
 	<icon src="logo/logo036.png" width="36"  height="36"/>
