@@ -21,7 +21,7 @@
 	<gap:platform name="android" />
 
 	<!-- PG version -->
-	<preference name="phonegap-version" value="cli-6.3.0" />
+	<preference name="phonegap-version" value="cli-6.5.0" />
 
 	<!-- Barcode Scanner -->
 	<!-- scanner version info (up tu PG3.4): https://github.com/wildabeast/BarcodeScanner/issues/68 -->
