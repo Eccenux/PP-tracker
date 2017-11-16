@@ -23,12 +23,17 @@
 	<!-- PG version -->
 	<preference name="phonegap-version" value="cli-6.5.0" />
 
-	<!-- plugins; info: https://build.phonegap.com/plugins -->
+	<!-- Barcode Scanner -->
+	<!-- scanner version info (up tu PG3.4): https://github.com/wildabeast/BarcodeScanner/issues/68 -->
 	<!-- scanner version info: https://github.com/wildabeast/BarcodeScanner/issues/68 -->
+	<!-- latest should be at npm: https://www.npmjs.com/package/cordova-plugin-barcodescanner -->
+	<!-- latest should be at npm: https://www.npmjs.com/package/phonegap-plugin-barcodescanner -->
 	<plugin name="phonegap-plugin-barcodescanner">
 		<param name="CAMERA_USAGE_DESCRIPTION" value="To scan barcodes." />
 	</plugin>
 
+	<!-- Whitelist (acces) https://github.com/apache/cordova-plugin-whitelist -->
+	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
 
 	<!-- icons -->
 	<icon src="logo/logo128.png" default="true" />
@@ -47,4 +52,6 @@
 
 	<!-- Cross domain AJAX access; "*" would mean: "to any" domain -->
 	<access origin="emonitoring.poczta-polska.pl/*" />
+	<!-- Controls which URLs the WebView itself can be navigated to. Applies to top-level navigations only. -->
+	<allow-navigation href="*" />
 </widget>
