@@ -5,6 +5,12 @@ PP tracker
 
 <em>PP tracker</em> umożliwia śledzenie przesyłek Poczty Polskiej w telefonie, co jest ułatwione dzięki wbudowanemu czytnikowi kodów kreskowych.
 
+Zamknięcie projektu
+-------------------
+Od dłuższego czasu nie mam czasu dostosowywać się do kolejnych zmian API po stronie Poczty Polskiej. Pojawiły się zresztą inne, mniej lub bardziej oficjalne aplikacje z podobnymi możliwościami.
+
+Projekt PP-tracker jest nieaktywny od 2017 roku i nie należy spodziewać się aktualizacji. W razie gdyby ktoś chciał spróbować, to zamiast PhoneGap należałoby użyć [Apache Cordova](https://en.wikipedia.org/wiki/Apache_Cordova).
+
 Pobieranie
 ----------
 <a href="https://build.phonegap.com/apps/296028/share">
